@@ -1,0 +1,13 @@
+CS 360 Project Three - Stockroom
+
+Suggested emulator test sequence:
+1. Launch the app and create a new username/password.
+2. Log out and log back in with the same credentials to verify persistence.
+3. Add two or more inventory items.
+4. Edit an item, increase/decrease its quantity, close/reopen the app, and verify values persist.
+5. Delete an item and verify it remains deleted after reopening the app.
+6. Open SMS alert settings. Test DENY first and verify inventory still works.
+7. Re-open settings and grant SEND_SMS permission. Enter a test phone number.
+8. Create or reduce an item to quantity 0 to exercise the SMS alert path.
+
+Note: Some Android Emulator images do not provide a carrier/SIM capable of delivering outbound SMS. The app uses Android SmsManager and handles send failures without stopping inventory functionality.

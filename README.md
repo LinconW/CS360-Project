@@ -1,25 +1,38 @@
-# CS 360 Project Reflection
+# Stockroom — Lincon Woodruff — CS 360 Project Two
 
-## Briefly summarize the requirements and goals of the app you developed. What user needs was this app designed to address?
+Native Android Java + XML UI for Project One Option 1: Inventory.
 
-The goal of my app was to create a functional mobile application that allows users to manage inventory in a simple and organized way. The app was designed to let users view inventory items, add new items, update existing information, and remove items when they are no longer needed. The main user need was having an easy way to keep track of inventory without making the process overly complicated.
+## Open and run
+1. Extract this ZIP. In Android Studio select Open and choose the Stockroom folder (the folder containing settings.gradle).
+2. Allow Gradle sync. Use JDK 17 or Android Studio's compatible embedded JDK. Install Android SDK Platform 35 if prompted. AGP 8.7.3 and Gradle 8.9 are pinned.
+3. Run the app on an Android 6.0 (API 23) or newer emulator/device.
+4. Enter any nonempty username and password to explore the UI. This does not authenticate or create a real account.
+5. Edit each screen visually under app/src/main/res/layout using Android Studio's Layout Editor.
 
-## What screens and features were necessary to support user needs and produce a user-centered UI for the app? How did your UI designs keep users in mind? Why were your designs successful?
+## Scope
+Four scrollable XML screens: login/create account; inventory grid; add/edit; SMS permission settings. The inventory uses a TableLayout with labeled columns and horizontal scrolling, a grid alternative to the proposal's optional RecyclerView. Every record has increase, decrease, edit and delete controls. Deletion requires confirmation. Required-field, unique-identifier and nonnegative-quantity validation are included as UI feedback.
 
-The app needed screens for logging in, viewing inventory, and adding or editing inventory items. The inventory screen provided users with a clear view of the items they had stored, while buttons and input fields made it easy to add or change information. I tried to keep the interface simple so users would immediately understand what each button and screen was used for. Keeping the layout consistent and avoiding unnecessary features helped make the app easier to navigate.
+Records live only in preview memory, with instance-state restoration for rotation. No SQLite, real authentication, or SMS sending is implemented. SMS runtime permission requests and status are real; the alert button only previews a message. The phone field is a UI placeholder and is not saved. Project Three should implement account/database storage, phone preference persistence, and a permission-guarded SMS alert when quantity transitions to zero. This submission never sends messages or stores credentials.
 
-## How did you approach the process of coding your app? What techniques or strategies did you use? How could those techniques or strategies be applied in the future?
+## Rubric review
+- Login: username, masked password, Log in, Create account.
+- Data: labeled grid, sample records, Add item, Delete on every row, quantity controls, add/edit fields.
+- SMS: optional telephony manifest declaration, SEND_SMS permission, runtime check/request, granted/denied UI, and continued inventory access after denial.
+- Hierarchy: forest-green actions, light neutral background, clear titles, labeled inputs, 48dp+ controls, text stock statuses, consistent back/cancel paths.
 
-I approached the coding process by breaking the application into smaller pieces instead of trying to complete everything at once. I first worked on the user interface and basic navigation, then added the database and functionality behind each feature. I also tested individual features as I added them so that problems were easier to identify. This strategy can be useful in future projects because breaking a large application into smaller components makes development and debugging more manageable.
+## Manual check before submission
+- Launch and verify the password is obscured; empty credentials show field errors.
+- Navigate through every screen in portrait and landscape.
+- Add/edit/delete temporary records; check empty and duplicate IDs, zero and invalid quantities.
+- Decrease to zero and verify Out of stock text and disabled decrease.
+- Deny SMS and return to inventory; grant through the system dialog/settings and check status updates.
+- Preview an alert: no SMS should be sent.
+- Try a small screen and large font; scroll forms and inventory horizontally as needed.
 
-## How did you test to ensure your code was functional? Why is this process important, and what did it reveal?
+## Validation in creation environment
+XML syntax and resource references checked. Android SDK/emulator unavailable in the creation environment; APK compilation and on-device visual/runtime verification must be completed in Android Studio before submission.
 
-I tested the application using the Android Emulator and checked the major features individually. I tested navigation between screens, adding inventory items, editing information, deleting items, and making sure the data displayed correctly. Testing is important because an application may compile successfully while still having problems during actual use. The testing process helped reveal issues with how different parts of the app interacted and allowed me to correct them before considering the application complete.
-
-## Consider the full app design and development process from initial planning to finalization. Where did you have to innovate to overcome a challenge?
-
-One area where I had to adapt was connecting the user interface to the application's data and making sure changes were reflected correctly on the screen. Designing the screens was more straightforward than making every feature work together. I had to troubleshoot problems, review how the different components communicated, and adjust my code when the original approach did not work as expected. This helped me become more comfortable solving problems instead of expecting the first solution to always work.
-
-## In what specific component of your mobile app were you particularly successful in demonstrating your knowledge, skills, and experience?
-
-I believe the inventory management portion of the app best demonstrates what I learned throughout the course. It required me to combine the user interface, application logic, navigation, and data storage instead of treating them as separate concepts. Creating a feature where users could interact with inventory data and see their changes reflected in the application demonstrated my ability to build a functional Android application from the initial design through implementation.
+## Android references
+https://developer.android.com/training/permissions/requesting
+https://developer.android.com/guide/topics/manifest/uses-feature-element
+https://developer.android.com/build/releases/agp-8-7-0-release-notes
